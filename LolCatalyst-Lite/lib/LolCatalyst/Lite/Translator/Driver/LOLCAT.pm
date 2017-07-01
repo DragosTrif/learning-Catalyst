@@ -1,6 +1,7 @@
 package LolCatalyst::Lite::Translator::Driver::LOLCAT;
-use Data::Dumper;
+
 use Moose;
+with 'LolCatalyst::Lite::Interface::TranslationDriver';
 use Acme::LOLCAT;
 use namespace::autoclean -except => 'meta';
 

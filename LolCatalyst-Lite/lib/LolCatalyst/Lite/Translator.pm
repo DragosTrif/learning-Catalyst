@@ -20,6 +20,9 @@ sub _build_translators {
   my %translators = (); 
   foreach my $class (@classes) {
     Class::Load::load_class($class);
+   unless ($class->does(TranslationDriver)) {
+      confess "Class ${class} in ${base}:: namespace dose not implement TranslationDriver";
+   }
     (my $name = $class) =~ s/^\Q${base}::\E//;
     $translators{$name} = $class->new;
   }
