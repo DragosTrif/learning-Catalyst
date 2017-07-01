@@ -19,7 +19,7 @@ sub _build_translators {
   my @classes = $mp->plugins;
   my %translators = (); 
   foreach my $class (@classes) {
-    Class::MOP::load_class($class);
+    Class::Load::load_class($class);
     (my $name = $class) =~ s/^\Q${base}::\E//;
     $translators{$name} = $class->new;
   }
