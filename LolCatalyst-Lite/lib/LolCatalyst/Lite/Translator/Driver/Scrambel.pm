@@ -1,4 +1,4 @@
-package LolCatalyst::Lite::Translator::Scrambel;
+package LolCatalyst::Lite::Translator::Driver::Scrambel;
 use Moose;
 
 sub shuffle {
