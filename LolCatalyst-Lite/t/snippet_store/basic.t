@@ -3,9 +3,9 @@ use warnings;
 
 use Test::More 'no_plan';
 use lib 'lib';
-use_ok('LolCatalyst::Lite::SnnipetStore');
+use_ok('LolCatalyst::Lite::SnipetStore');
 
-my $store = LolCatalyst::Lite::SnnipetStore->new();
+my $store = LolCatalyst::Lite::SnipetStore->new();
 
 my $num_snips = 3;
 my @snips;
