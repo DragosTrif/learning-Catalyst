@@ -3,7 +3,7 @@ use warnings;
 
 use aliased 'LolCatalyst::Lite::SnipetStore';
 
-sub COMPONENT { SnnipetStore->new;
+sub COMPONENT { SnipetStore->new;
 }
 
 1;

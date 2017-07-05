@@ -7,7 +7,7 @@ use parent qw(Catalyst::Controller);
 
 sub base :Chained('/') :PathPart('translate') :CaptureArgs(0) {
   my ($self, $c) = @_;
-  $c->stash(collection => $c->model('SnnipetStore'));
+  $c->stash(collection => $c->model('SnipetStore'));
   $c->log->debug($c->stash->{collection});
 }
 
