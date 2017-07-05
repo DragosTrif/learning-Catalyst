@@ -53,7 +53,7 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub translate :Local {
+sub translate :Private {
   my ($self, $c) = @_;
   my $lol = $c->req->body_params->{lol}; # only for post
     # $c->req->params->{lol} # would catach get an post

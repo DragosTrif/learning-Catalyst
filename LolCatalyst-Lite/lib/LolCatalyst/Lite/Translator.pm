@@ -1,4 +1,5 @@
 package LolCatalyst::Lite::Translator;
+use aliased 'LolCatalyst::Lite::Interface::TranslationDriver';
 use Moose;
 use Module::Pluggable::Object;
 use namespace::autoclean -except => 'meta';
