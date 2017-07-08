@@ -1,4 +1,5 @@
 package LolCatalyst::Lite::Controller::Translate;
+use Data::Dumper;
 
 use strict;
 use warnings;
@@ -8,7 +9,6 @@ use parent qw(Catalyst::Controller);
 sub base :Chained('/') :PathPart('translate') :CaptureArgs(0) {
   my ($self, $c) = @_;
   $c->stash(collection => $c->model('SnipetStore'));
-  $c->log->debug($c->stash->{collection});
 }
 
 sub create :Chained('base') :PathPart('') :Args(0) {
@@ -18,6 +18,7 @@ sub create :Chained('base') :PathPart('') :Args(0) {
 
   if ($req->method eq 'POST' && (my $lol = $req->body_params->{lol})) {
     my $snnipet = $c->stash->{collection}->create({text => $lol});
+    $c->log->debug("\$var_2 is: ". Dumper($snnipet));
     $c->stash(object => $snnipet);
     $c->detach('view');
   }
