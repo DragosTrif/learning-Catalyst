@@ -12,10 +12,10 @@ my ($request, $response);
 $request = POST(
   'http://localhost/translate',
   'Content-Type' => 'form-data',
-  'Content' => [ 'lol' => 'Can i have a cheese burger?'],
+  'Content' => ['lol' => 'Can i have a cheese burger?'],
 );
 
 ok($response = request($request), 'Response');
 ok($response->is_success, 'Resonse succsefull 2xx');
 is($response->content_type, 'text/html', 'Response content type');
-like($response->content, qr/CHEEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEZ/, 'contains the translate string');

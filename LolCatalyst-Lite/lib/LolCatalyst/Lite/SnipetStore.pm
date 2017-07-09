@@ -1,6 +1,8 @@
 package LolCatalyst::Lite::SnipetStore;
 
 use Moose;
+use lib 'lib';
+use aliased 'LolCatalyst::Lite::Snnipet';
 use namespace::clean -except => 'meta';
 
 has '_snipets' => (is => 'ro', default => sub { [] });
@@ -17,9 +19,16 @@ sub all {
 
 sub create {
   my ($self, $new) = @_;
-  $new->{id} = @{$self->_snipets} + 1;
-  push @{$self->_snipets}, $new;
-  return $new;
+  # $new->{id} = @{$self->_snipets} + 1;
+  # push @{$self->_snipets}, $new;
+  # return $new;
+  my $snippet = Snnipet->new(
+    %$new,
+    id => (@{$self->_snipets} + 1),
+  );
+
+  push @{$self->_snipets}, $snippet;
+  return $snippet;
 }
 
 __PACKAGE__->meta->make_immutable;
