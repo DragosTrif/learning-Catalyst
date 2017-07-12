@@ -2,11 +2,17 @@ use strict;
 use warnings;
 
 use Test::More 'no_plan';
+use Test::Exception;
 use lib 'lib';
 use_ok('LolCatalyst::Lite::SnipetStore');
 
-my $store = LolCatalyst::Lite::SnipetStore->new();
+# my $store = LolCatalyst::Lite::SnipetStore->new();
 
+dies_ok{
+  LolCatalyst::Lite::SnipetStore->new()
+} 'Create with out trasnlator object fails';
+
+my $store = LolCatalyst::Lite::SnipetStore->new(translator => 'DUMMY');
 my $num_snips = 3;
 my @snips;
 ok(

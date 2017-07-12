@@ -28,9 +28,10 @@ sub view :Chained('object') :PathPart('') :Args(0) {
   my ($self, $c) = @_;
 
   my $object = $c->stash->{object};
-  $c->stash(
-    result => $c->model('Translator')->translate($object->{text})
-  );
+  # $c->stash(
+  #   result => $c->model('Translator')->translate($object->{text})
+  # );
+  $c->stash(result => $object->translated);
 }
 
 sub object :Chained('base') :PathPart('') :CaptureArgs(1) {

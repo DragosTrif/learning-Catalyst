@@ -15,9 +15,8 @@ use Catalyst::Runtime 5.80;
 #                 application's home directory
 # Static::Simple: will serve static files from the application's root
 #                 directory
-
+# -Debug
 use Catalyst qw/
-    -Debug
     ConfigLoader
     Static::Simple
     Unicode
@@ -43,7 +42,7 @@ our $VERSION = '0.01';
 # if ($ENV{APP_TEST}) {
 #   __PACKAGE__->config(
 #     'Plugin::Config::Loader' => {file => __PACKAGE__->path_to('t/lib/db/lolcatalyst_lite_testing.conf')}
-#  );  
+#  );
 # }
 
 __PACKAGE__->config(

@@ -6,6 +6,7 @@ use aliased 'LolCatalyst::Lite::Snnipet';
 use namespace::clean -except => 'meta';
 
 has '_snipets' => (is => 'ro', default => sub { [] });
+has '_translator' => (is => 'ro', required => 1, init_arg => 'translator');
 
 sub find {
   my ($self, $id) = @_;
@@ -25,6 +26,7 @@ sub create {
   my $snippet = Snnipet->new(
     %$new,
     id => (@{$self->_snipets} + 1),
+    translator => $self->_translator,
   );
 
   push @{$self->_snipets}, $snippet;
