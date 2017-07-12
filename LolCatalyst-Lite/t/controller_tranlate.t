@@ -18,14 +18,14 @@ $request = POST(
 ok($response = request($request), 'Response');
 ok($response->is_success, 'Resonse succsefull 2xx');
 is($response->content_type, 'text/html', 'Response content type');
-like($response->content, qr/CHEEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEZ/, 'contains the translate string');
 
 ok(
   $response = request(GET 'http://localhost/translate/1'),
   'Request for defaulat traslation type'
 );
 
-like($response->content, qr/CHEEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEZ/, 'contains the translate string');
 
 ok(
   $response = request(GET 'http://localhost/translate/100'),

@@ -38,7 +38,7 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1) {
   my ($self, $c, $id) = @_;
 
   my $object = $c->stash->{collection}->find($id);
-  $c->detach('/error 404') unless $object;
+  $c->detach('/error_404') unless $object;
   $c->stash(object => $object);
 }
 __PACKAGE__->meta->make_immutable;
