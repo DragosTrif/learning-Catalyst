@@ -43,10 +43,16 @@ Standard 404 error page
 
 sub default :Path {
     my ( $self, $c ) = @_;
-    $c->response->body( 'Page not found' );
-    $c->response->status(404);
+    # $c->response->body( 'Page not found' );
+    # $c->response->status(404);
+    $c->detach('/error_404');
 }
 
+sub error_404 :Private {
+  my ( $self, $c ) = @_;
+  $c->response->status(404);
+  $c->response->body( 'Page not found' );
+}
 =head2 end
 
 Attempt to render a view, if needed.
@@ -79,7 +85,7 @@ sub end : ActionClass('RenderView') {
   if ($errors) {
     $c->log->error("Erros in {\ c->action}");
     $c->log->error($_) foreach @{$c->error};
-    $c->status(500);
+    $c->res->status(500);
     $c->res->body('internal server error');
     $c->clear_errors;
   }
