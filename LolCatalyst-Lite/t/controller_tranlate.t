@@ -33,3 +33,11 @@ ok(
 );
 
 cmp_ok($response->code, '==', 404, '404 error returned');
+
+ok(
+  $response = request(GET 'http://localhost/translate/1/to/LOLCAT'),
+  'Request for specific traslantion',
+);
+
+ok($response->is_success, 'Reponse succsefull 2xx');
+like($response->content, qr/CHEEZ/, 'contains the translate string');

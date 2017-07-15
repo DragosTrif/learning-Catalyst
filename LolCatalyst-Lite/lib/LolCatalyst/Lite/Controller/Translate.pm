@@ -18,7 +18,7 @@ sub create :Chained('base') :PathPart('') :Args(0) {
 
   if ($req->method eq 'POST' && (my $lol = $req->body_params->{lol})) {
     my $snnipet = $c->stash->{collection}->create({text => $lol});
-    $c->log->debug("\$var_2 is: ". Dumper($snnipet));
+
     $c->stash(object => $snnipet);
     $c->detach('view');
   }
@@ -40,6 +40,21 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1) {
   my $object = $c->stash->{collection}->find($id);
   $c->detach('/error_404') unless $object;
   $c->stash(object => $object);
+  my $o = $c->stash->{object};
+  $c->log->debug("\$var_2 is:", Dumper($o));
+}
+
+sub trasnlate_to :Chained('object') :PathPart('to') :Args(1) {
+  my ($self, $c, $to) = @_;
+
+  my $object = $c->stash->{object};
+
+  $c->stash(
+    result => $object->translated_to($to),
+  );
+  my $test = $c->stash->{result};
+  $c->log->debug("\$var_2 is: $test" );
+  $c->stash(template => 'translate/view.tt');
 }
 __PACKAGE__->meta->make_immutable;
 

@@ -12,6 +12,10 @@ sub translated {
   $self->_translator->translate($self->text);
 }
 
+sub translated_to {
+  my ($self, $to) = @_;
+  $self->_translator->translate_to($to, $self->text);
+}
 __PACKAGE__->meta->make_immutable;
 
 1;
