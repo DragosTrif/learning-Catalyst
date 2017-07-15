@@ -18,14 +18,14 @@ $request = POST(
 ok($response = request($request), 'Response');
 ok($response->is_success, 'Resonse succsefull 2xx');
 is($response->content_type, 'text/html', 'Response content type');
-like($response->content, qr/CHEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEEZ/, 'contains the translate string');
 
 ok(
   $response = request(GET 'http://localhost/translate/1'),
   'Request for defaulat traslation type'
 );
 
-like($response->content, qr/CHEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEEZ/, 'contains the translate string');
 
 ok(
   $response = request(GET 'http://localhost/translate/100'),
@@ -40,4 +40,11 @@ ok(
 );
 
 ok($response->is_success, 'Reponse succsefull 2xx');
-like($response->content, qr/CHEEZ/, 'contains the translate string');
+like($response->content, qr/CHEEEZ/, 'contains the translate string');
+
+ok(
+  $response = request(GET 'http://localhost/translate/1/to/NONEXISTENT'),
+  'Request for nonexistent trasnaltion type',
+);
+
+cmp_ok($response->code, '==', 404, '404 error returned');

@@ -18,7 +18,7 @@ sub _build_translators {
 
   my $mp = Module::Pluggable::Object->new( search_path => [$base]);
   my @classes = $mp->plugins;
-  my %translators = (); 
+  my %translators = ();
   foreach my $class (@classes) {
     Class::Load::load_class($class);
    unless ($class->does(TranslationDriver)) {
@@ -40,6 +40,11 @@ sub translate_to {
   $self->translators->{$target}->translate($text);
 }
 
+sub can_translate_to {
+  my ($self, $target) = @_;
+
+  return exists $self->translators->{$target};
+}
 __PACKAGE__->meta->make_immutable;
 
 1;

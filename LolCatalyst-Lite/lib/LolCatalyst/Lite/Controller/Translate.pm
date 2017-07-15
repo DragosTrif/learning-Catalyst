@@ -41,19 +41,22 @@ sub object :Chained('base') :PathPart('') :CaptureArgs(1) {
   $c->detach('/error_404') unless $object;
   $c->stash(object => $object);
   my $o = $c->stash->{object};
-  $c->log->debug("\$var_2 is:", Dumper($o));
+  #$c->log->debug("\$var_2 is:", Dumper($o));
 }
 
 sub trasnlate_to :Chained('object') :PathPart('to') :Args(1) {
   my ($self, $c, $to) = @_;
 
   my $object = $c->stash->{object};
-
+  unless ($object->can_translate_to($to)) {
+    $c->detach('/error_404');
+  }
   $c->stash(
     result => $object->translated_to($to),
   );
+
   my $test = $c->stash->{result};
-  $c->log->debug("\$var_2 is: $test" );
+  $c->log->debug("\$var_3 is: $test" );
   $c->stash(template => 'translate/view.tt');
 }
 __PACKAGE__->meta->make_immutable;

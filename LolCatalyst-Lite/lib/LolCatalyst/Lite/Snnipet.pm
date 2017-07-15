@@ -5,7 +5,7 @@ use namespace::clean -except => 'meta';
 
 has 'id' => (is => 'ro', required => 1);
 has 'text' => (is => 'ro', required => 1);
-has '_translator' =>(is => 'ro', required => 1, init_arg => 'translator');
+has '_translator' =>(is => 'ro', required => 1, init_arg => 'translator', handles => ['can_translate_to'],);
 
 sub translated {
   my ($self) = @_;
@@ -16,6 +16,8 @@ sub translated_to {
   my ($self, $to) = @_;
   $self->_translator->translate_to($to, $self->text);
 }
+
+
 __PACKAGE__->meta->make_immutable;
 
 1;
