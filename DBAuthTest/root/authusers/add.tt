@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title> Add user ??</title>
+  </head>
+  <body>
+    <form action="[% c.uri_for(c.controller('AuthUsers').action_for('add')) %]" method="post">
+    [% #Simple column set %]
+    [% FOREACH col = users_rc.result_source.columns %]
+    <div>
+      <label>
+        [% NEXT IF col == 'last_modified' || col == 'id' %]
+        <input type="text" name="[% col %]">
+      </label> [% col %]
+      [% IF errors.$col %]
+        <span style="color: red;">[% errors.$col %]</span>
+      [% END %]
+    </div>
+    [% END %]
+    <input type="submit" value="Create">
+    </form>
+  </body>
+</html>
